@@ -22,5 +22,4 @@ router.put('/:id', updateAuthor); // ruta para actualizar un autor existente por
 
 router.delete('/:id', deleteAuthor);
 
-export default router; 
-
+export default router;  
