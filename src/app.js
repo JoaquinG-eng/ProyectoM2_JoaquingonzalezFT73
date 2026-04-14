@@ -1,12 +1,12 @@
-app.get('/authors', getAuthors); // ruta para obtener todos los autores
+app.get('/authors', getAuthors); 
 
-app.get('/authors/:id', getAuthorById); // ruta para obtener un autor por ID
+app.get('/authors/:id', getAuthorById); 
 
-app.post('/authors', createAuthor); // ruta para crear un nuevo autor
+app.post('/authors', createAuthor); 
 
-app.put('/authors/:id', updateAuthor); // ruta para actualizar un autor existente
+app.put('/authors/:id', updateAuthor); 
 
-app.delete('/authors/:id', deleteAuthor); // ruta para eliminar un autor por ID
+app.delete('/authors/:id', deleteAuthor); 
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
