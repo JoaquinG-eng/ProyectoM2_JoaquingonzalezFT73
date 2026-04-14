@@ -6,40 +6,40 @@ let authors = [
 let    nextId = 4;
 
 
-export const getAuthors = (req, res) => { // crear funcion para obtener todos los autores
+export const getAuthors = (req, res) => { 
 
-    res.status(200).json(authors); // retorna la lista de autores con status 200 (OK)
+    res.status(200).json(authors); 
 };
 
-export const getAuthorById = (req, res) => { // crear funcion para obtener un autor por ID
+export const getAuthorById = (req, res) => { 
     const id = parseInt(req.params.id) ;
 
 
-    const author = authors.find(a => a.id === id);// busca el autor por ID en el array de autores
+    const author = authors.find(a => a.id === id);
     if (!author) {
-    return res.status(404).json({ message: 'Author not found' }); // retorna 404 si el autor no existe
+    return res.status(404).json({ message: 'Author not found' }); 
     }
     res.json(author);
 };
-authors.push({ id: nextId++, name: 'Author Four', bio: 'Bio of Author Four' }); // Agregar un nuevo autor al array de autores
+authors.push({ id: nextId++, name: 'Author Four', bio: 'Bio of Author Four' }); 
 
-res.status(201).json(authors[authors.length - 1]); // Retornar el nuevo autor creado con status 201 (Created)
+res.status(201).json(authors[authors.length - 1]); 
 
 
-export const createAuthor = (req, res) => { // crear nuevo autor
+export const createAuthor = (req, res) => { 
     const { name, bio } = req.body;
     if (!name || !bio) {
-        return res.status(400).json({ message: 'Name and bio are required' }); // validacion de entrada
+        return res.status(400).json({ message: 'Name and bio are required' }); 
     }
     
-    const newAuthor = { id: nextId++, name, bio };// crear nuevo autor con ID autoincremental
+    const newAuthor = { id: nextId++, name, bio };
     
     authors.push(newAuthor);
     
-    res.status(201).json(newAuthor); // retornar el nuevo autor creado con status 201 (Created)
+    res.status(201).json(newAuthor); 
 };
 
-export const updateAuthor = (req, res) => { // actualizar autor existente 
+export const updateAuthor = (req, res) => { 
     
     const id = parseInt(req.params.id);
     
@@ -49,19 +49,19 @@ export const updateAuthor = (req, res) => { // actualizar autor existente
     
     if (authorIndex === -1) {
     
-        return res.status(404).json({ message: 'Author not found' }); // retorna 404 si el autor no existe
+        return res.status(404).json({ message: 'Author not found' }); 
     }
     if (!name || !bio) {
     
-        return res.status(400).json({ message: 'Name and bio are required' }); // validacion de entrada para actualizar autor
+        return res.status(400).json({ message: 'Name and bio are required' }); 
     }
     
     authors[authorIndex] = { id, name, bio };
     
-    res.json(authors[authorIndex]); // retorna el autor actualizado
+    res.json(authors[authorIndex]); 
 };
 
-export const deleteAuthor = (req, res) => { // eliminar autor por ID
+export const deleteAuthor = (req, res) => { 
     
     const id = parseInt(req.params.id);
     
@@ -69,19 +69,19 @@ export const deleteAuthor = (req, res) => { // eliminar autor por ID
     
     if (authorIndex === -1) {
     
-        return res.status(404).json({ message: 'Author inexistente' }); // retorna 404 si el autor no existe
+        return res.status(404).json({ message: 'Author inexistente' }); 
     }
     
-    const deletedAuthor = authors.splice(authorIndex, 1); // eliminar autor del array
+    const deletedAuthor = authors.splice(authorIndex, 1); 
     
-    res.json(deletedAuthor[0]); // retornar el autor eliminado
+    res.json(deletedAuthor[0]); 
 
-    res.status(204).send(); // retornar status 204 (No Content) para indicar que la eliminación fue exitosa sin contenido en la respuesta
+    res.status(204).send(); 
 
 
 };
 
-export default { // exportar todas las funciones del controlador de autores
+export default { 
     getAuthors, 
     getAuthorById,  
     createAuthor,
