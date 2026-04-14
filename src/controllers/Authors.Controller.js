@@ -1,4 +1,4 @@
-let authors = [ // array de autores con datos de ejemplo
+let authors = [                 
 { id: 1, name: 'joaquin', bio: 'desarrolador full stack' },
 { id: 2, name: 'maria', bio: 'diseñadora gráfica' },
 { id: 3, name: 'Author Three', bio: 'Bio of Author Three' }
@@ -6,7 +6,7 @@ let authors = [ // array de autores con datos de ejemplo
 let    nextId = 4;
 
 
-export const getAuthors = (req, res) => { // crea funcion para obtener todos los autores   
+export const getAuthors = (req, res) => { // crear funcion para obtener todos los autores
 
     res.status(200).json(authors); // retorna la lista de autores con status 200 (OK)
 };

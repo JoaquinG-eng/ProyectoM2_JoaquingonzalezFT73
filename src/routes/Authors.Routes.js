@@ -8,10 +8,10 @@ deleteAuthor } from '../controllers/Authors.Controller.js'; // importa las funci
 const router = express.Router();
 
 
-router.get('/', getAuthors);
+router.get('/', getAuthors); // ruta para obtener todos los autores, llama a la función getAuthors del controlador de autores
 
 
-router.get('/:id', getAuthorById);
+router.get('/:id', getAuthorById); // ruta para obtener un autor por ID, llama a la función getAuthorById del controlador de autores
 
 
 router.post('/', createAuthor); // ruta para crear un nuevo autor, llama a la función createAuthor del controlador de autores
