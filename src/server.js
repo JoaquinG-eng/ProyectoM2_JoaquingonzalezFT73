@@ -14,7 +14,7 @@ fs.readFileSync(swaggerPath, "utf-8")
 );
 const app = express();
 
-app.use(express.json());
+app.use(express.json()); 
 
 // rutas
 app.use("/api/authors", authorsRoutes);
