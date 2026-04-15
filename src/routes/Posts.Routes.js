@@ -3,7 +3,7 @@ import { getPosts,
     getPostById,
     createPost,
     updatePost,
-    deletePost } from "../controllers/Posts.Controller.js";// importa las funciones del controlador de posts
+    deletePost } from "../controllers/Post.Controllers.js";// importa las funciones del controlador de posts
 
 const router = Router(); // crea un nuevo router para manejar las rutas de posts
 

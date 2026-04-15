@@ -23,8 +23,6 @@ export const getAuthorById = (req, res) => {
 };
 authors.push({ id: nextId++, name: 'Author Four', bio: 'Bio of Author Four' }); 
 
-res.status(201).json(authors[authors.length - 1]); 
-
 
 export const createAuthor = (req, res) => { 
     const { name, bio } = req.body;

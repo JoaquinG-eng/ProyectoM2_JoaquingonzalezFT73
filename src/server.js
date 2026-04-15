@@ -1,22 +1,28 @@
 import express from "express";
 import swaggerUi from "swagger-ui-express";
-import swaggerDocument from "./swagger.json" assert { type: "json" };
+import fs from "fs";
 
 import authorsRoutes from "./routes/Authors.Routes.js";
 import postsRoutes from "./routes/Posts.Routes.js";
 
+import path from "path";
+
+const swaggerPath = path.resolve("src/swagger/swagger.json");
+
+const swaggerDocument = JSON.parse(
+fs.readFileSync(swaggerPath, "utf-8")
+);
 const app = express();
 
 app.use(express.json());
 
-// Rutas
+// rutas
 app.use("/api/authors", authorsRoutes);
 app.use("/api/posts", postsRoutes);
 
-// Swagger
+// swagger
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// Puerto
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
