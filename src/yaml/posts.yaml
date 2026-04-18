@@ -1,0 +1,80 @@
+paths:
+  /api/posts:
+    get:
+      summary: Obtener todos los posts
+      responses:
+        200:
+          description: Lista de posts
+          content:
+            application/json:
+              example:
+                - id: 1
+                  title: "Post 1"
+                  content: "Contenido"
+                  author_id: 1
+
+    post:
+      summary: Crear un post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              title: "Nuevo post"
+              content: "Contenido del post"
+              author_id: 1
+
+      responses:
+        201:
+          description: Post creado
+          content:
+            application/json:
+              example:
+                id: 1
+                title: "Nuevo post"
+                content: "Contenido del post"
+                author_id: 1
+
+  /api/posts/{id}:
+    get:
+      summary: Obtener un post por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+
+      responses:
+        200:
+          description: Post encontrado
+          content:
+            application/json:
+              example:
+                id: 1
+                title: "Post 1"
+                content: "Contenido"
+                author_id: 1
+
+        404:
+          description: Post no encontrado
+
+    delete:
+      summary: Eliminar un post
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+
+      responses:
+        200:
+          description: Post eliminado
+          content:
+            application/json:
+              example:
+                message: "Post eliminado correctamente"
+
+        404:
+          description: Post no encontrado

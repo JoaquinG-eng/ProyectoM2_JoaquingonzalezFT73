@@ -1,5 +1,8 @@
-app.use(errorHandler); 
+export const errorHandler = (err, req, res, next) => {
+console.error(err);
 
-import { errorHandler } from "../middlewares/Error.Middlewares.js"; 
-
-export default app; 
+res.status(500).json({
+error: 'Server error',
+detail: err.message
+});
+};

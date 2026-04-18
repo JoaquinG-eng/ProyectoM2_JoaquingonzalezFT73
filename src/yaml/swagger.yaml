@@ -1,0 +1,158 @@
+openapi: 3.0.0
+
+info:
+  title: MiniBlog API
+  version: 1.0.0
+  description: API para gestionar autores y posts
+
+servers:
+  - url: http://localhost:3000
+
+paths:
+
+  /api/authors:
+    get:
+      summary: Obtener autores
+      responses:
+        200:
+          description: Lista de autores
+
+    post:
+      summary: Crear autor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              name: Juan
+              email: juan@mail.com
+              bio: Autor de prueba
+      responses:
+        201:
+          description: Autor creado
+
+  /api/authors/{id}:
+    get:
+      summary: Obtener autor por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Autor encontrado
+        404:
+          description: No encontrado
+
+    put:
+      summary: Actualizar autor
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: Nuevo nombre
+              email: nuevo@mail.com
+              bio: Actualizado
+      responses:
+        200:
+          description: Autor actualizado
+
+    delete:
+      summary: Eliminar autor
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        204:
+          description: Autor eliminado
+
+  /api/posts:
+    get:
+      summary: Obtener posts
+      responses:
+        200:
+          description: Lista de posts
+
+    post:
+      summary: Crear post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              title: Post
+              content: Contenido
+              authorId: 1  
+      responses:
+        201:
+          description: Post creado
+
+  /api/posts/{id}:
+    get:
+      summary: Obtener post por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Post encontrado
+        404:
+          description: No encontrado
+
+    put:
+      summary: Actualizar post
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            example:
+              title: Editado
+              content: Nuevo contenido
+              authorId: 1
+      responses:
+        200:
+          description: Post actualizado
+
+    delete:
+      summary: Eliminar post
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        204:
+          description: Post eliminado
+
+  /api/posts/author/{authorId}: 
+    get:
+      summary: Obtener posts por autor
+      parameters:
+        - name: authorId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Lista de posts del autor

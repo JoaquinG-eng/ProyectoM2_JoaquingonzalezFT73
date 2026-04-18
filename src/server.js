@@ -1,26 +1,22 @@
 import express from "express";
+import donenv from "dotenv";
 import swaggerUi from "swagger-ui-express";
-import fs from "fs";
+import YAML from "yamljs";
 
 import authorsRoutes from "./routes/Authors.Routes.js";
 import postsRoutes from "./routes/Posts.Routes.js";
 
-import path from "path";
-
-const swaggerPath = path.resolve("src/swagger/swagger.json");
-
-const swaggerDocument = JSON.parse(
-fs.readFileSync(swaggerPath, "utf-8")
-);
 const app = express();
 
-app.use(express.json()); 
+app.use(express.json());
 
 // rutas
 app.use("/api/authors", authorsRoutes);
 app.use("/api/posts", postsRoutes);
 
 // swagger
+const swaggerDocument = YAML.load("src/yaml/swagger.yaml");
+
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const PORT = process.env.PORT || 3000;

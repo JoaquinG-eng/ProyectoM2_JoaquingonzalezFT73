@@ -1,0 +1,33 @@
+paths:
+  /api/authors:
+    get:
+      summary: Obtener todos los autores
+      responses:
+        200:
+          description: Lista de autores
+          content:
+            application/json:
+              example:
+                - id: 1
+                  name: "Joaquín"
+                  email: "joa@test.com"
+
+    post: 
+      summary: Crear un autor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              name: "Nuevo Autor"
+              email: "autor@test.com"
+
+      responses:
+        201:
+          description: Autor creado
+          content:
+            application/json:
+              example:
+                id: 1
+                name: "Nuevo Autor"
+                email: "autor@test.com"
