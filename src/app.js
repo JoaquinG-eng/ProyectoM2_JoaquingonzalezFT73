@@ -1,15 +1,24 @@
-app.get('/authors', getAuthors); 
+import express from "express";
+import swaggerUi from "swagger-ui-express";
+import YAML from "yamljs";
 
-app.get('/authors/:id', getAuthorById); 
+import authorsRoutes from "./routes/authors.routes.js";
+import postsRoutes from "./routes/posts.routes.js";
+import { errorHandler } from "./middlewares/Error.Middlewares.js";
 
-app.post('/authors', createAuthor); 
+const app = express();
 
-app.put('/authors/:id', updateAuthor); 
+app.use(express.json());
 
-app.delete('/authors/:id', deleteAuthor); 
 
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
-});
+app.use("/api/authors", authorsRoutes);
+app.use("/api/posts", postsRoutes);
 
-export default app; 
+
+const swaggerDocument = YAML.load("src/yaml/swagger.yaml");
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+
+app.use(errorHandler);
+
+export default app;

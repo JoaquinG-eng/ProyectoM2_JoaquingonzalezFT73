@@ -1,93 +1,77 @@
-let posts = [
-    { id: 1, title: 'First Post', content: 'This is the first post', authorId: 1 },
-    { id: 2, title: 'Second Post', content: 'This is the second post', authorId: 2 },
-    { id: 3, title: 'Third Post', content: 'This is the third post', authorId: 3 }
-];
+import * as service from "../services/Posts.Services.js";
 
-let nextId = 4;
 
-// GET todos los posts
-export const getPosts = (req, res) => {
-    res.json(posts);
+export const getPosts = async (req, res, next) => {
+try {
+const data = await service.getAllPosts();
+res.json(data);
+} catch (err) {
+next(err);
+}
 };
 
-// GET post por ID
-export const getPostById = (req, res) => {
-    const id = parseInt(req.params.id);
 
-    const post = posts.find(p => p.id === id);
+export const getPostById = async (req, res, next) => {
+try {
+const data = await service.getPostById(req.params.id);
 
-    if (!post) {
-        return res.status(404).json({ message: 'Post not found' });
-    }
+if (!data) {
+return res.status(404).json({ error: "Post not found" });
+}
 
-    res.json(post);
+res.json(data);
+} catch (err) {
+next(err);
+}
 };
 
-// GET posts por autor
-export const getPostsByAuthor = (req, res) => {
-    const authorId = parseInt(req.params.authorId);
 
-    const authorPosts = posts.filter(p => p.authorId === authorId);
-
-    res.json(authorPosts);
+export const getPostsByAuthor = async (req, res, next) => {
+try {
+const data = await service.getPostsByAuthor(req.params.authorId);
+res.json(data);
+} catch (err) {
+next(err);
+}
 };
 
-// CREATE post
-export const createPost = (req, res) => {
-    const { title, content, authorId } = req.body;
 
-    if (!title || !content || !authorId) {
-        return res.status(400).json({
-            message: 'Title, content and authorId are required'
-        });
-    }
+export const createPost = async (req, res, next) => {
+try {
+const { title, content, author_id } = req.body;
 
-    const newPost = {
-        id: nextId++,
-        title,
-        content,
-        authorId
-    };
+if (!title || !content || !author_id) {
+return res.status(400).json({ error: "Missing fields" });
+}
 
-    posts.push(newPost);
-
-    res.status(201).json(newPost);
+const data = await service.createPost(req.body);
+res.status(201).json(data);
+} catch (err) {
+next(err);
+}
 };
 
-// UPDATE post
-export const updatePost = (req, res) => {
-    const id = parseInt(req.params.id);
-    const { title, content, authorId } = req.body;
 
-    const postIndex = posts.findIndex(p => p.id === id);
+export const updatePost = async (req, res, next) => {
+try {
+const data = await service.updatePost(req.params.id, req.body);
 
-    if (postIndex === -1) {
-        return res.status(404).json({ message: 'Post not found' });
-    }
+if (!data) {
+return res.status(404).json({ error: "Post not found" });
+}
 
-    if (!title || !content || !authorId) {
-        return res.status(400).json({
-            message: 'Title, content and authorId are required'
-        });
-    }
-
-    posts[postIndex] = { id, title, content, authorId };
-
-    res.json(posts[postIndex]);
+res.json(data);
+} catch (err) {
+next(err);
+}
 };
 
-// DELETE post
-export const deletePost = (req, res) => {
-    const id = parseInt(req.params.id);
 
-    const postIndex = posts.findIndex(p => p.id === id);
-
-    if (postIndex === -1) {
-        return res.status(404).json({ message: 'Post not found' });
-    }
-
-    posts.splice(postIndex, 1);
-
-    res.json({ message: 'Post deleted' });
+export const deletePost = async (req, res, next) => {
+try {
+await service.deletePost(req.params.id);
+res.json({ message: "Post deleted" });
+} catch (err) {
+next(err);
+}
 };
