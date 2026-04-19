@@ -3,36 +3,98 @@ openapi: 3.0.0
 info:
   title: MiniBlog API
   version: 1.0.0
-  description: API para gestionar autores y posts
+  description: API REST para gestionar autores y posts de un blog
 
 servers:
   - url: http://localhost:3000
 
+tags:
+  - name: Authors
+    description: Operaciones relacionadas a autores
+  - name: Posts
+    description: Operaciones relacionadas a posts
+
+components:
+  schemas:
+
+    Author:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Juan Pérez
+        email:
+          type: string
+          example: juan@mail.com
+        bio:
+          type: string
+          example: Desarrollador backend
+      required:
+        - name
+        - email
+
+    Post:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: Mi primer post
+        content:
+          type: string
+          example: Contenido del post
+        author_id:
+          type: integer
+          example: 1
+      required:
+        - title
+        - content
+        - author_id
+
 paths:
 
+  
   /api/authors:
     get:
-      summary: Obtener autores
+      tags: [Authors]
+      summary: Obtener todos los autores
       responses:
         200:
           description: Lista de autores
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Author'
 
     post:
-      summary: Crear autor
+      tags: [Authors]
+      summary: Crear un nuevo autor
       requestBody:
         required: true
         content:
           application/json:
-            example:
-              name: Juan
-              email: juan@mail.com
-              bio: Autor de prueba
+            schema:
+              $ref: '#/components/schemas/Author'
       responses:
         201:
-          description: Autor creado
+          description: Autor creado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
+        400:
+          description: Datos inválidos
 
   /api/authors/{id}:
     get:
+      tags: [Authors]
       summary: Obtener autor por ID
       parameters:
         - name: id
@@ -43,10 +105,15 @@ paths:
       responses:
         200:
           description: Autor encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
         404:
-          description: No encontrado
+          description: Autor no encontrado
 
     put:
+      tags: [Authors]
       summary: Actualizar autor
       parameters:
         - name: id
@@ -57,15 +124,20 @@ paths:
       requestBody:
         content:
           application/json:
-            example:
-              name: Nuevo nombre
-              email: nuevo@mail.com
-              bio: Actualizado
+            schema:
+              $ref: '#/components/schemas/Author'
       responses:
         200:
           description: Autor actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
+        404:
+          description: Autor no encontrado
 
     delete:
+      tags: [Authors]
       summary: Eliminar autor
       parameters:
         - name: id
@@ -74,32 +146,49 @@ paths:
           schema:
             type: integer
       responses:
-        204:
+        200:
           description: Autor eliminado
+        404:
+          description: Autor no encontrado
+
+
 
   /api/posts:
     get:
-      summary: Obtener posts
+      tags: [Posts]
+      summary: Obtener todos los posts
       responses:
         200:
           description: Lista de posts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
 
     post:
-      summary: Crear post
+      tags: [Posts]
+      summary: Crear un nuevo post
       requestBody:
         required: true
         content:
           application/json:
-            example:
-              title: Post
-              content: Contenido
-              authorId: 1  
+            schema:
+              $ref: '#/components/schemas/Post'
       responses:
         201:
-          description: Post creado
+          description: Post creado correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        400:
+          description: Datos inválidos
 
   /api/posts/{id}:
     get:
+      tags: [Posts]
       summary: Obtener post por ID
       parameters:
         - name: id
@@ -110,10 +199,15 @@ paths:
       responses:
         200:
           description: Post encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
         404:
-          description: No encontrado
+          description: Post no encontrado
 
     put:
+      tags: [Posts]
       summary: Actualizar post
       parameters:
         - name: id
@@ -124,15 +218,20 @@ paths:
       requestBody:
         content:
           application/json:
-            example:
-              title: Editado
-              content: Nuevo contenido
-              authorId: 1
+            schema:
+              $ref: '#/components/schemas/Post'
       responses:
         200:
           description: Post actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        404:
+          description: Post no encontrado
 
     delete:
+      tags: [Posts]
       summary: Eliminar post
       parameters:
         - name: id
@@ -141,11 +240,14 @@ paths:
           schema:
             type: integer
       responses:
-        204:
+        200:
           description: Post eliminado
+        404:
+          description: Post no encontrado
 
-  /api/posts/author/{authorId}: 
+  /api/posts/author/{authorId}:
     get:
+      tags: [Posts]
       summary: Obtener posts por autor
       parameters:
         - name: authorId
@@ -156,3 +258,9 @@ paths:
       responses:
         200:
           description: Lista de posts del autor
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'

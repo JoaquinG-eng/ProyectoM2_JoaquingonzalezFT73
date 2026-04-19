@@ -1,12 +1,12 @@
-import pkg from 'pg';
+import pkg from "pg"; 
 const { Pool } = pkg;
 
 const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: String(process.env.DB_PASSWORD),
-  port: process.env.DB_PORT,
+user: "joaquin",
+host: "localhost",
+database: "miniblog",
+password: "admin",
+port: 5432,
 });
 
 export default pool;
