@@ -2,8 +2,8 @@ import express from "express";
 import swaggerUi from "swagger-ui-express";
 import YAML from "yamljs";
 
-import authorsRoutes from "./routes/authors.routes.js";
-import postsRoutes from "./routes/posts.routes.js";
+import authorsRoutes from "./routes/Authors.Routes.js";
+import postsRoutes from "./routes/Posts.Routes.js";
 import { errorHandler } from "./middlewares/Error.Middlewares.js";
 
 const app = express();
