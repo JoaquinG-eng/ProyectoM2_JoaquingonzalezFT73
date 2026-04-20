@@ -3,14 +3,14 @@
   "version": "1.0.0",
   "description": "API REST para blog con Express y PostgreSQL",
   "main": "server.js",
-"scripts": {
-  "start": "node src/server.js",
-  "dev": "node --watch src/server.js",
-  "test": "vitest",
-  "test:watch": "vitest",
-  "test:coverage": "vitest --coverage",
-  "test:ui": "vitest --ui"
-},
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "vitest",
+    "test:watch": "vitest",
+    "test:coverage": "vitest --coverage",
+    "test:ui": "vitest --ui"
+  },
   "keywords": [
     "express",
     "postgresql",

@@ -1,9 +1,6 @@
 import dotenv from "dotenv";
 
-
-if (process.env.NODE_ENV !== "production") {
   dotenv.config();
-}
 
 import app from "./app.js";
 import pool from "./db/index.js";

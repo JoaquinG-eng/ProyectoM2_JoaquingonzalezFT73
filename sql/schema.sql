@@ -1,4 +1,4 @@
--- Tabla de autores
+
 CREATE TABLE
     authors (
         id SERIAL PRIMARY KEY,
@@ -8,7 +8,7 @@ CREATE TABLE
         created_at TIMESTAMPTZ DEFAULT NOW ()
     );
 
--- Tabla de posts
+
 CREATE TABLE
     posts (
         id SERIAL PRIMARY KEY,
@@ -20,7 +20,7 @@ CREATE TABLE
         FOREIGN KEY (author_id) REFERENCES authors (id) ON DELETE CASCADE
     );
 
--- Insertar datos de ejemplo
+
 INSERT INTO
     authors (name, email, bio)
 VALUES
