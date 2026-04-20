@@ -2,32 +2,98 @@ paths:
   /api/authors:
     get:
       summary: Obtener todos los autores
+      tags: [Authors]
       responses:
         200:
           description: Lista de autores
           content:
             application/json:
-              example:
-                - id: 1
-                  name: "Joaquín"
-                  email: "joa@test.com"
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Author'
 
-    post: 
+    post:
       summary: Crear un autor
+      tags: [Authors]
       requestBody:
         required: true
         content:
           application/json:
-            example:
-              name: "Nuevo Autor"
-              email: "autor@test.com"
-
+            schema:
+              $ref: '#/components/schemas/AuthorInput'
       responses:
         201:
           description: Autor creado
           content:
             application/json:
-              example:
-                id: 1
-                name: "Nuevo Autor"
-                email: "autor@test.com"
+              schema:
+                $ref: '#/components/schemas/Author'
+        400:
+          description: Datos inválidos
+
+  /api/authors/{id}:
+    get:
+      summary: Obtener autor por ID
+      tags: [Authors]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Autor encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
+        404:
+          description: Autor no encontrado
+
+    put:
+      summary: Actualizar autor
+      tags: [Authors]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthorInput'
+      responses:
+        200:
+          description: Autor actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
+        404:
+          description: Autor no encontrado
+
+    delete:
+      summary: Eliminar autor
+      tags: [Authors]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Autor eliminado
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: "Autor eliminado correctamente"
+        404:
+          description: Autor no encontrado

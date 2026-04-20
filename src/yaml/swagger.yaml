@@ -7,7 +7,7 @@ info:
 
 servers:
   - url: http://localhost:3000
-  - url: https://proyectom2joaquingonzalezft73-production.up.railway.app/api-docs
+  - url: https://proyectom2joaquingonzalezft73-production.up.railway.app
 tags:
   - name: Authors
     description: Operaciones relacionadas a autores
