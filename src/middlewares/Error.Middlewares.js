@@ -6,3 +6,4 @@ error: 'Server error',
 detail: err.message
 });
 };
+
