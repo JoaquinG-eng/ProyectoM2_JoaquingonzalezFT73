@@ -78,3 +78,42 @@ paths:
 
         404:
           description: Post no encontrado
+
+        /api/posts/{id}:
+  get:
+    ...
+
+  delete:
+    ...
+
+  put:
+    summary: Actualizar un post
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+
+    requestBody:
+      required: true
+      content:
+        application/json:
+          example:
+            title: "Post actualizado"
+            content: "Contenido editado"
+            author_id: 1
+
+    responses:
+      200:
+        description: Post actualizado
+        content:
+          application/json:
+            example:
+              id: 1
+              title: "Post actualizado"
+              content: "Contenido editado"
+              author_id: 1
+
+      404:
+        description: Post no encontrado
