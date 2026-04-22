@@ -140,7 +140,7 @@ POST https://TU-APP.onrender.com/api/posts \
   -d '{
     "title": "Mi primer post",
     "content": "Contenido de prueba",
-    "author_id": 1 
+    "authorId": 1 
   }'
 ```
 
