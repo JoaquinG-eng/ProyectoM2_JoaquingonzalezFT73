@@ -177,7 +177,7 @@ Esto ayuda a evitar datos incompletos en la base.
 La API incluye documentación visual con Swagger:
 
 ```bash
-https:rest-api-node-production-551b.up.railway.app/api-docs/ 
+http://rest-api-node-production-551b.up.railway.app/api-docs/ 
 ```
 
 Desde ahí podés explorar todos los endpoints.
@@ -207,7 +207,7 @@ Si querés correr la API en tu propia máquina:
 ### 1. Clonar repositorio
 
 ```bash
-git https://github.com/JoaquinG-eng/Rest-Api-Node.git
+git clone:https://github.com/JoaquinG-eng/Rest-Api-Node
 cd Rest-Api-Node
 ```
 
